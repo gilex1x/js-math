@@ -10,6 +10,15 @@ let currentMap;
 function setMap(mapIndex) {
   const map = maps[mapIndex];
   currentMap = map.map((row) => row.split(''));
+  currentMap.forEach((row, rowIndex )=> {
+    row.forEach((col,colIndex)=>{
+      const emoji = emojis[col];
+      const posX = elementSize * (colIndex + 1);
+      const posY = elementSize * (rowIndex + 1);
+      gameCanva.fillText(emoji,posX,posY);
+      
+    })
+  });
 }
 
 function setCanvasSize() {
@@ -30,24 +39,8 @@ function gameStart() {
   //config elemnts size
   gameCanva.font = `${elementSize}px Verdana`;
   gameCanva.textAlign = "end";
-  setMap(0);
-  for (let row = 1; row <= 10; row++) {
-    // rows
-    for (let col = 1; col <= 10; col++) {
-      //columns
-      gameCanva.fillText(
-        emojis[currentMap[row - 1][col - 1]],
-        elementSize * col,
-        elementSize * row
-      );
-    }
-  }
+  setMap(1);
 }
-
-// function gameLoop() {
-//   setCanvasSize();
-//   setInterval(() => console.log("Game loop:", emojis), 1000);
-// }
 
 window.addEventListener("load", setCanvasSize);
 window.addEventListener("resize", setCanvasSize);
