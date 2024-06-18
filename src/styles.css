@@ -19,6 +19,11 @@ body {
     border: 4px solid #ff6600;
     border-radius: 8px;
     background-color: #feff9d;
+    position: absolute;
+  }
+
+  #game-canvas-player{
+    background-color: transparent;
   }
   
   .game-btns{
@@ -27,6 +32,7 @@ body {
     flex-wrap: wrap;
     margin: 0 auto;
     width: 100%;
+    align-self: flex-end;
   }
   
   button {
