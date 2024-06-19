@@ -5,6 +5,13 @@ body {
     margin: 0;
     padding: 0;
   }
+
+  .game-messages{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    font-size: 32px;
+  }
   
   .game-container {
     display: flex;

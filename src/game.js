@@ -2,6 +2,11 @@
  * Get canvas methods autocomplete
  * @type {HTMLCanvasElement}
  */
+//messages
+let lifesMessage = document.getElementById("game-messages-lifes");
+let levelMessage = document.getElementById("game-messages-level");
+let infoMessage = document.getElementById("game-messages-info");
+
 const canvasMap = document.getElementById("game-canvas-map");
 const gameCanva = canvasMap.getContext("2d");
 //player canvas
@@ -15,6 +20,7 @@ let elementSize;
 let currentMap;
 let canvasSize;
 let currentLevel = 0;
+let lives = 3;
 //Player
 const playerPosition = {
   x: 0,
@@ -55,6 +61,8 @@ function setMap(mapIndex) {
     });
   });
   playerCanva.fillText(emojis["PLAYER"], playerPosition.x, playerPosition.y);
+  lifesMessage.innerHTML = `Vidas: ${'💓'.repeat(lives)}`;
+  levelMessage.innerHTML = `Nivel: ${currentLevel+1}`;
 }
 
 function setCanvasSize() {
@@ -79,6 +87,11 @@ function gameStart() {
   gameCanva.textAlign = "end";
   playerCanva.font = `${elementSize}px Verdana`;
   playerCanva.textAlign = "end";
+  if (lives == 0) {
+    currentLevel = 0;
+    lives = 3;
+    enemiesPositions = [];
+  }
   setMap(currentLevel);
 }
 
@@ -142,6 +155,12 @@ function checkCollition() {
     (enemy) => enemy.x == playerPosition.x && enemy.y == playerPosition.y
   );
   if (bombCollosion) {
+    lives--;
+    gameCanva.fillText(
+      emojis["BOMB_COLLISION"],
+      playerPosition.x,
+      playerPosition.y
+    );
     gameStart();
     return;
   }
